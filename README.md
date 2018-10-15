@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sebastiencs/chat.svg?branch=master)](https://travis-ci.org/sebastiencs/chat)
+
 # chat
 Simple one on one chat
 
