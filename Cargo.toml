@@ -1,0 +1,16 @@
+[package]
+name = "chat"
+version = "0.1.0"
+authors = ["Sebastien Chapuis <sebastien@chapu.is>"]
+
+[dependencies]
+actix = "0.7"
+futures = "0.1.25"
+tokio-tcp = "0.1.2"
+tokio-io = "0.1.9"
+tokio-reactor = "0.1.6"
+tokio = "0.1.11"
+bytes = "0.4.7"
+byteorder = "1.2.6"
+atty = "0.2.11"
+clap = "2.32.0"
