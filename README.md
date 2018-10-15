@@ -31,3 +31,8 @@ chat --help # For more options and informations
 ```shell
 cargo doc --document-private-items --open
 ```
+
+## Tests
+```shell
+cargo test
+```
