@@ -225,3 +225,47 @@ pub fn to_binary(data: &[u8], kind: Kind) -> Bytes {
     buf.put_slice(data);
     buf.into()
 }
+
+#[cfg(test)]
+mod tests {
+
+    use super::Kind;
+    //use bytes::BytesMut;
+    use bytes::{BufMut, BytesMut};
+
+    #[test]
+    fn to_binary() {
+        let res = super::to_binary(&[1, 2, 3], Kind::Data);
+
+        let kind_flag: u8 = Kind::Data.into();
+        assert_eq!(res.as_ref(), &[kind_flag | 0x10, 3, 1, 2, 3]);
+    }
+
+    #[test]
+    fn to_binary_u16() {
+        let bytes: Vec<u8> = vec![1; 256];
+        let res = super::to_binary(&bytes, Kind::Data);
+
+        let kind_flag: u8 = Kind::Data.into();
+        let mut buf = BytesMut::with_capacity(256 + 3);
+        buf.put_u8(kind_flag | 0x20);
+        buf.put_u16_be(bytes.len() as u16);
+        buf.put_slice(&bytes);
+
+        assert_eq!(res.as_ref(), buf.as_ref());
+    }
+
+    #[test]
+    fn to_binary_u32() {
+        let bytes: Vec<u8> = vec![2; 65_536];
+        let res = super::to_binary(&bytes, Kind::Data);
+
+        let kind_flag: u8 = Kind::Data.into();
+        let mut buf = BytesMut::with_capacity(65_536 + 5);
+        buf.put_u8(kind_flag | 0x40);
+        buf.put_u32_be(bytes.len() as u32);
+        buf.put_slice(&bytes);
+
+        assert_eq!(res.as_ref(), buf.as_ref());
+    }
+}
