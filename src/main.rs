@@ -1,6 +1,3 @@
-#![feature(tool_lints)]
-#![warn(clippy::all)]
-
 //! Chat client/server
 //!
 //! # Summary
